@@ -42,6 +42,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       _this.canvasScreenHeight = _this.canvas.clientHeight;
     });
 
+    //MOUSE AND POINTERS
     this.canvas.addEventListener('mousedown', function (event) {
       _this.mousedown = true;
       var position = getPosition(_this, event);
@@ -60,6 +61,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         _this.ctx.stroke();
       }
     });
+
+    /*
+    check https://developer.mozilla.org/en-US/docs/Web/API/Touch_events for info about how to implement touch drawing
+     //TOUCH DEVICES
+    this.canvas.addEventListener('touchstart', (event) => {
+      this.mousedown = true;
+      var position = getPositionTouch(this, event);
+      this.ctx.beginPath();
+      this.ctx.moveTo(position[0], position[1]);
+    });
+     window.addEventListener('touchend', () => {
+      this.mousedown = false;
+    });
+     this.canvas.addEventListener('touchmove', (event) => {
+      if (this.mousedown) {
+        var position = getPositionTouch(this, event);
+        this.ctx.lineTo(position[0], position[1]);
+        this.ctx.stroke();
+      }
+    });
+    */
   };
 
   PerSimo.prototype.setColor = function (color) {
