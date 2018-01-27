@@ -1,0 +1,73 @@
+/*
+MIT License
+Copyright (c) 2018 Davide Trisolini
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+(function (window, document) {
+  //PRIVATE FUNCTIONS
+  function getPosition(param, event) {
+    var x, y;
+
+    x = (event.pageX - param.canvas.offsetLeft) / (param.canvasScreenWidth / param.canvasWidth);
+    y = (event.pageY - param.canvas.offsetTop) / (param.canvasScreenHeight / param.canvasHeight);
+
+    return [x, y];
+  };
+
+
+  //CONSTRUCTOR
+
+  var PerSimo = function (options) {
+    this.canvas = options.canvas;
+    if (this.canvas.getAttribute('width') === undefined || this.canvas.getAttribute('height') === undefined) {
+      throw new Error('Attributes width and height are mandatory on canvas element!');
+    }
+    this.canvasWidth = options.width || parseInt(this.canvas.getAttribute('width'), 10);
+    this.canvasHeight = options.height || parseInt(this.canvas.getAttribute('height'), 10);
+    this.canvasScreenWidth = this.canvas.clientWidth;
+    this.canvasScreenHeight = this.canvas.clientHeight;
+    this.ctx = this.canvas.getContext('2d');
+    this.mousedown = false;
+
+    this.setColor(options.color = '#000');
+    this.setSize(options.size = 10);
+
+    window.addEventListener('resize', () => {
+      this.canvasScreenWidth = this.canvas.clientWidth;
+      this.canvasScreenHeight = this.canvas.clientHeight;
+    });
+
+
+    this.canvas.addEventListener('mousedown', (event) => {
+      this.mousedown = true;
+      var position = getPosition(this, event);
+      this.ctx.beginPath();
+      this.ctx.moveTo(position[0], position[1]);
+    });
+
+    window.addEventListener('mouseup', () => {
+      this.mousedown = false;
+    });
+
+    this.canvas.addEventListener('mousemove', (event) => {
+      if (this.mousedown) {
+        var position = getPosition(this, event);
+        this.ctx.lineTo(position[0], position[1]);
+        this.ctx.stroke();
+      }
+    });
+  };
+
+
+  PerSimo.prototype.setColor = function (color) {
+    this.ctx.strokeStyle = color;
+  };
+
+  PerSimo.prototype.setSize = function (size) {
+    this.ctx.lineWidth = parseInt(size, 10);
+  };
+
+  window.PerSimo = PerSimo;
+}(window, document));

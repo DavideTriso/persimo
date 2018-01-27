@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Per simo</title>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 100px 50px 50px 50px;
+      background-color: #2f2c2c;
+    }
+
+    h1 {
+      text-align: center;
+      color: #000;
+      font-size: 40px;
+      text-shadow: 2px 2px #e22cca;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      border: 1px solid #20202;
+      background-color: #fff;
+    }
+
+    .tools {
+      display: flex;
+      justify-content: center;
+      height: 90px;
+      align-items: center;
+      align-content: center;
+    }
+
+    .color {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: block;
+      margin: 15px;
+      flex: 0 1 30px;
+    }
+
+    .black {
+      color: #000;
+      background-color: #000;
+    }
+
+    .red {
+      background-color: #df1515;
+      color: #df1515;
+    }
+
+    .blue {
+      background-color: #3279e0;
+      color: #3279e0;
+    }
+
+    .yellow {
+      background-color: #fcc902;
+      color: #fcc902;
+    }
+
+    .radius {
+      margin: 15px;
+    }
+
+    .active {
+      box-shadow: 0 0 10px rgba(225, 225, 225, 0.7);
+    }
+  </style>
+  <script src="perSimo.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var draw = new PerSimo({
+        canvas: document.getElementById('artboard'),
+        widht: 1000,
+        height: 600,
+        color: '#000',
+        size: 10
+      });
+
+      var black = document.getElementById('black');
+      var red = document.getElementById('red');
+      var blue = document.getElementById('blue');
+      var yellow = document.getElementById('yellow');
+      var colors = [black, red, blue, yellow];
+      var size = document.getElementById('size');
+
+
+
+      function disableColor(colors, className) {
+        var l = colors.length;
+        for (var i = 0; i < l; i++) {
+          colors[i].classList.remove(className)
+        }
+      }
+
+      black.addEventListener('click', function() {
+        disableColor(colors, 'active');
+        black.classList.add('active')
+        draw.setColor('#000');
+      });
+      red.addEventListener('click', function() {
+        disableColor(colors, 'active');
+        red.classList.add('active')
+        draw.setColor('#df1515');
+      });
+      blue.addEventListener('click', function() {
+        disableColor(colors, 'active');
+        blue.classList.add('active')
+        draw.setColor('#3279e0');
+      });
+      yellow.addEventListener('click', function() {
+        disableColor(colors, 'active');
+        yellow.classList.add('active')
+        draw.setColor('#fcc902');
+      });
+
+      size.addEventListener('change', function() {
+        draw.setSize(size.value)
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Per Simo</h1>
+  <div class="tools">
+    <span class="color black active" id="black"></span>
+    <span class="color red" id="red"></span>
+    <span class="color blue" id="blue"></span>
+    <span class="color yellow" id="yellow"></span>
+    <input class="radius" type="number" min="1" max="500" value="10" id="size" />
+  </div>
+  <canvas width="1000" height="600" id="artboard">
+        <p>Your browser does not support canvas</p>
+    </canvas>
+
+</body>
+
+</html>
