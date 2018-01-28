@@ -2,7 +2,7 @@
 
 ## About
 
-Paint on HTML canvas with mouse. Check demo at (https://davidetriso.github.io/persimo/)[https://davidetriso.github.io/persimo/]
+Paint on HTML canvas with mouse. Check demo at [https://davidetriso.github.io/persimo/](https://davidetriso.github.io/persimo/)
 **Plugin is under development, the API may and will change rapidly. Do not use in production!**
 
 ## Dependencies
