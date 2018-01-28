@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 gulp.task('jsDist', function () {
   gulp.src('src/js/*.js')
     .pipe(babel({
-      presets: ['env']
+      presets: ['es2015-script']
     }))
     .pipe(gulp.dest('dist'))
     .pipe(rename({
@@ -28,7 +28,7 @@ gulp.task('jsDist', function () {
 gulp.task('jsDocs', function () {
   gulp.src('src/js/*.js')
     .pipe(babel({
-      presets: ['env']
+      presets: ['es2015-script']
     }))
     .pipe(gulp.dest('docs'))
     .pipe(notify({
