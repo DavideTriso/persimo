@@ -1,9 +1,8 @@
-# PER SIMO (**DRAFT**)
+# PERSIMO
 
 ## About
 
 Paint on HTML canvas with mouse. Check demo at [https://davidetriso.github.io/persimo/](https://davidetriso.github.io/persimo/)
-**Plugin is under development, the API may and will change rapidly. Do not use in production!**
 
 ## Dependencies
 
@@ -31,7 +30,7 @@ npm install persimo
 ## Usage
 
 1. Include the JS script **perSimo.js** - or the minified production script **perSimo.min.js** -  in the head or the body of your HTML file.
-2. Initialise the widget within an inline script tag, or in an external JS file.
+2. Initialise the widget.
 
 ### HTML
 
@@ -47,7 +46,13 @@ Use following HTML markup for canvas:
 Initialise the plugin as follows:
 
 ```javascript
-
+var draw = new PerSimo({
+  canvas: document.getElementById('canvasID'),
+  width: 600,  //same as set in the canvas width element
+  height: 400, //same as set in the canvas width element
+  color: '#000',
+  size: 10
+});
 ```
 
 ## Methods
@@ -57,11 +62,13 @@ The plugin supports following methods: `setColor`, `setSize`.
 ### setColor:
 
 ```javascript
+draw.setColor('#ccc');
 ```
 
 ### setSize:
 
 ```javascript
+draw.setSize(30);
 ```
 
 ## LICENSE
