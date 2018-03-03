@@ -2,7 +2,7 @@
 
 ## About
 
-Paint on HTML canvas with mouse. Check demo at [https://davidetriso.github.io/persimo/](https://davidetriso.github.io/persimo/)
+Paint on HTML canvas. Check demo at [https://davidetriso.github.io/persimo/](https://davidetriso.github.io/persimo/)
 
 ## Dependencies
 
@@ -39,7 +39,7 @@ Use following HTML markup for canvas:
 ```html
 <canvas with="600" height="400"></canvas>
 ```
-**NOTE:** the attributes width and height are mandatory on canvas element.
+**NOTE:** the attributes width and height are **mandatory** on canvas element.
 
 ### JS: Initialise
 

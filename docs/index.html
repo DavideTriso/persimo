@@ -4,12 +4,12 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Persimo</title>
   <style>
     body,
     html {
       margin: 0;
-      padding: 30px 20px 20px 20px;
       background-color: #2f2c2c;
     }
 
@@ -78,7 +78,7 @@
       var draw = new PerSimo({
         canvas: document.getElementById('artboard'),
         widht: 1000,
-        height: 600,
+        height: 500,
         color: '#000',
         size: 10
       });
@@ -137,7 +137,7 @@
     <span class="color yellow" id="yellow"></span>
     <input class="radius" type="number" min="1" max="500" value="10" id="size" />
   </div>
-  <canvas width="1000" height="600" id="artboard">
+  <canvas width="1000" height="500" id="artboard">
         <p>Your browser does not support canvas</p>
     </canvas>
 
