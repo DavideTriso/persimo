@@ -27,6 +27,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return [x, y];
   };
 
+
+  function getTouchPosition(param, event) {
+    x = (event.touches[0].pageX - param.canvas.offsetLeft) / (param.canvasScreenWidth / param.canvasWidth);
+    y = (event.touches[0].pageY - param.canvas.offsetTop) / (param.canvasScreenHeight / param.canvasHeight);
+
+    return [x, y];
+  }
   //CONSTRUCTOR
 
   function PerSimo(options) {
@@ -49,9 +56,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       this.canvasScreenHeight = this.canvas.clientHeight;
     });
 
-
-
-    //MOUSE AND POINTERS
+    //MOUSE
     this.canvas.addEventListener('mousedown', (event) => {
       this.mousedown = true;
       var position = getPosition(this, event);
@@ -71,13 +76,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       }
     });
 
-    /*
-    check https://developer.mozilla.org/en-US/docs/Web/API/Touch_events for info about how to implement touch drawing
-
     //TOUCH DEVICES
     this.canvas.addEventListener('touchstart', (event) => {
+      event.preventDefault();
       this.mousedown = true;
-      var position = getPositionTouch(this, event);
+      var position = getTouchPosition(this, event);
       this.ctx.beginPath();
       this.ctx.moveTo(position[0], position[1]);
     });
@@ -88,12 +91,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
     this.canvas.addEventListener('touchmove', (event) => {
       if (this.mousedown) {
-        var position = getPositionTouch(this, event);
+        var position = getTouchPosition(this, event);
         this.ctx.lineTo(position[0], position[1]);
         this.ctx.stroke();
       }
     });
-    */
   };
 
 

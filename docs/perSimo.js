@@ -29,6 +29,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     return [x, y];
   };
 
+  function getTouchPosition(param, event) {
+    x = (event.touches[0].pageX - param.canvas.offsetLeft) / (param.canvasScreenWidth / param.canvasWidth);
+    y = (event.touches[0].pageY - param.canvas.offsetTop) / (param.canvasScreenHeight / param.canvasHeight);
+
+    return [x, y];
+  }
   //CONSTRUCTOR
 
   function PerSimo(options) {
@@ -53,7 +59,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       _this.canvasScreenHeight = _this.canvas.clientHeight;
     });
 
-    //MOUSE AND POINTERS
+    //MOUSE
     this.canvas.addEventListener('mousedown', function (event) {
       _this.mousedown = true;
       var position = getPosition(_this, event);
@@ -73,26 +79,26 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       }
     });
 
-    /*
-    check https://developer.mozilla.org/en-US/docs/Web/API/Touch_events for info about how to implement touch drawing
-     //TOUCH DEVICES
-    this.canvas.addEventListener('touchstart', (event) => {
-      this.mousedown = true;
-      var position = getPositionTouch(this, event);
-      this.ctx.beginPath();
-      this.ctx.moveTo(position[0], position[1]);
+    //TOUCH DEVICES
+    this.canvas.addEventListener('touchstart', function (event) {
+      event.preventDefault();
+      _this.mousedown = true;
+      var position = getTouchPosition(_this, event);
+      _this.ctx.beginPath();
+      _this.ctx.moveTo(position[0], position[1]);
     });
-     window.addEventListener('touchend', () => {
-      this.mousedown = false;
+
+    window.addEventListener('touchend', function () {
+      _this.mousedown = false;
     });
-     this.canvas.addEventListener('touchmove', (event) => {
-      if (this.mousedown) {
-        var position = getPositionTouch(this, event);
-        this.ctx.lineTo(position[0], position[1]);
-        this.ctx.stroke();
+
+    this.canvas.addEventListener('touchmove', function (event) {
+      if (_this.mousedown) {
+        var position = getTouchPosition(_this, event);
+        _this.ctx.lineTo(position[0], position[1]);
+        _this.ctx.stroke();
       }
     });
-    */
   };
 
   PerSimo.prototype.setColor = function (color) {
