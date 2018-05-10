@@ -35,6 +35,10 @@
       align-content: center;
     }
 
+    label {
+      color: #fff;
+    }
+
     .color {
       width: 30px;
       height: 30px;
@@ -79,7 +83,7 @@
         canvas: document.getElementById('artboard'),
         widht: 1000,
         height: 500,
-        color: '#000',
+        color: '#000000',
         size: 10
       });
 
@@ -89,6 +93,8 @@
       var yellow = document.getElementById('yellow');
       var colors = [black, red, blue, yellow];
       var size = document.getElementById('size');
+      var blur = document.getElementById('blur');
+      var opacity = document.getElementById('opacity');
 
 
 
@@ -102,7 +108,7 @@
       black.addEventListener('click', function() {
         disableColor(colors, 'active');
         black.classList.add('active')
-        draw.setColor('#000');
+        draw.setColor('#000000');
       });
       red.addEventListener('click', function() {
         disableColor(colors, 'active');
@@ -121,7 +127,15 @@
       });
 
       size.addEventListener('change', function() {
-        draw.setSize(size.value)
+        draw.setSize(size.value);
+      });
+
+      blur.addEventListener('change', function() {
+        draw.setBlur(blur.value);
+      });
+
+      opacity.addEventListener('change', function() {
+        draw.setOpacity(opacity.value);
       });
 
     });
@@ -135,7 +149,15 @@
     <span class="color red" id="red"></span>
     <span class="color blue" id="blue"></span>
     <span class="color yellow" id="yellow"></span>
-    <input class="radius" type="number" min="1" max="500" value="10" id="size" />
+    <label>Size
+      <input class="radius" type="number" min="1" max="500" value="10" id="size" />
+    </label>
+    <label>Blur
+      <input class="radius" type="number" min="0" max="500" value="0" id="blur" />
+    </label>
+    <label>Opacity
+      <input class="radius" type="number" min="0" max="100" value="100" id="opacity" />
+    </label>
   </div>
   <canvas width="1000" height="500" id="artboard">
         <p>Your browser does not support canvas</p>
